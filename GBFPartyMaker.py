@@ -2,7 +2,7 @@ import sys
 
 def init():
     global joblist
-    joblist = []
+    joblist = [[]]
     joblist = joblist + [[1, 7, 3, '버서커'], [2, 7, 1, '스파르타'], [3, 5, 1, '세이지'], [4, 5, 4, '워록'], [5, 4, 10, '의적'], [6, 7, 4, '카오스루다'], [7, 6, 6, '레슬러'], [8, 2, 10, '하운드독'], [9, 9, 4, '엘류시온'], [10, 1, 3, '아프사라스']]
     joblist = joblist + [[11, 7, 8, '글로리'], [12, 5, 5, '흑묘도사'], [13, 8, 2, '검호'], [14, 8, 6, '마법전사'], [15, 4, 10, '닥터']]
 
@@ -114,12 +114,16 @@ def search(job, elem):
 	print('오메가\t아카샤')
 	for i in range(0, 2):
 		akasha = akashaIndex(job[i+1])
+		if i == 1 and akashaIndex(job[1]) == akashaIndex(job[2]):
+			continue
 		akashaSet = set()
 		for data in datalist[elem]:
 			if data[2] in akasha or data[3] in akasha:
 				akashaSet.add(data[0])
 		for j in range(0, 2):
 			omega = job[j+1]
+			if j == 1 and job[1] == job[2]:
+				continue
 			omegaSet = set()
 			for data in datalist[elem]:
 				if omega in data[2:4]:
@@ -156,12 +160,12 @@ def searchElem(elem):
 	
 def searchJob(job):
 	for elem in range(0,6):
-		search(job, elem)
+		search(joblist[job], elem)
 
 		
 init()
 parse()
-searchElem(2)
+searchJob(10)
 
 
 
